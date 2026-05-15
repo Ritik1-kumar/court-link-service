@@ -1,0 +1,9 @@
+{
+  "type": "module",
+  "dependencies": {
+    "xero-node": "^13.3.0",
+    "stripe": "^19.3.0",
+    "@supabase/supabase-js": "^2.81.1",
+    "openid-client": "^5.7.0"
+  }
+}

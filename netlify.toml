@@ -1,0 +1,64 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
+  external_node_modules = ["stripe", "@supabase/supabase-js", "xero-node"]
+
+
+# ─── Security headers ─────────────────────────────────────────────────────────
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    # Report-only mode: violations are logged to the browser console but nothing
+    # is blocked. Once you've confirmed no breakage, promote this to
+    # Content-Security-Policy and tighten as needed.
+    Content-Security-Policy-Report-Only = "default-src 'self'; script-src 'self' https://js.stripe.com; connect-src 'self' https://*.supabase.co https://api.stripe.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; frame-src https://js.stripe.com"
+
+# ─── API redirects — MUST come before /* catchall ────────────────────────────
+[[redirects]]
+  from = "/api/health"
+  to = "/.netlify/functions/health"
+  status = 200
+
+[[redirects]]
+  from = "/api/create-payment-intent"
+  to = "/.netlify/functions/create-payment-intent"
+  status = 200
+
+[[redirects]]
+  from = "/api/stripe-webhook"
+  to = "/.netlify/functions/stripe-webhook"
+  status = 200
+
+[[redirects]]
+  from = "/api/xero/auth"
+  to = "/.netlify/functions/xero-auth"
+  status = 200
+
+[[redirects]]
+  from = "/api/xero/callback"
+  to = "/.netlify/functions/xero-callback"
+  status = 200
+
+[[redirects]]
+  from = "/api/xero/create-invoice-for-case"
+  to = "/.netlify/functions/create-invoice-for-case"
+  status = 200
+
+[[redirects]]
+  from = "/api/xero-get-invoice-pdf"
+  to = "/.netlify/functions/xero-get-invoice-pdf"
+  status = 200
+
+# ─── SPA fallback — MUST be last ─────────────────────────────────────────────
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

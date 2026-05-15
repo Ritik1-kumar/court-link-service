@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 200" width="680" height="200">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&amp;family=Lato:wght@300;400&amp;display=swap');
+    </style>
+  </defs>
+
+  <!-- Icon: Two interlinked chain rings forming a legal/connection symbol -->
+  <!-- Left ring -->
+  <circle cx="80" cy="100" r="44" fill="none" stroke="#2A6496" stroke-width="7"/>
+  <!-- Right ring overlapping -->
+  <circle cx="124" cy="100" r="44" fill="none" stroke="#1B3A5C" stroke-width="7"/>
+
+  <!-- White mask to create interlinking effect: left ring in front of right on top half -->
+  <!-- Clip the overlapping region: left ring covers right ring on top -->
+  <clipPath id="leftTop">
+    <rect x="0" y="55" width="124" height="45"/>
+  </clipPath>
+  <clipPath id="rightBottom">
+    <rect x="80" y="100" width="90" height="45"/>
+  </clipPath>
+  <!-- Redraw left ring arc on top (upper half) over the right ring -->
+  <circle cx="80" cy="100" r="44" fill="none" stroke="#2A6496" stroke-width="7" clip-path="url(#leftTop)"/>
+  <!-- Redraw right ring arc on bottom (lower half) over left ring -->
+  <circle cx="124" cy="100" r="44" fill="none" stroke="#1B3A5C" stroke-width="7" clip-path="url(#rightBottom)"/>
+
+  <!-- Divider line -->
+  <line x1="195" y1="38" x2="195" y2="162" stroke="#2A6496" stroke-width="1.5" opacity="0.4"/>
+
+  <!-- Text: COURTLINK -->
+  <text
+    x="218"
+    y="96"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="52"
+    font-weight="700"
+    letter-spacing="3"
+    fill="#1B3A5C"
+  >COURTLINK</text>
+
+  <!-- Text: SERVICES -->
+  <text
+    x="222"
+    y="136"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="26"
+    font-weight="400"
+    letter-spacing="10"
+    fill="#2A6496"
+  >SERVICES</text>
+
+  <!-- Subtle underline accent -->
+  <line x1="218" y1="148" x2="648" y2="148" stroke="#2A6496" stroke-width="1.5" opacity="0.35"/>
+</svg>
